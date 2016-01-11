@@ -233,14 +233,6 @@ namespace Server
             var selectedRowIndex = connectionList.SelectedCells[0].RowIndex;
             var clientSocket = PacketHandler.clientList.ElementAt(selectedRowIndex).clientSocket;
             clientSocket.Send(requestPackage.ToByteArray());
-            /*
-            Bitmap bmp = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                g.CopyFromScreen(0, 0, 0, 0, Screen.PrimaryScreen.Bounds.Size);
-                bmp.Save("screenshot.png");  // saves the image
-            }
-            */
         }
     }
 }
