@@ -245,5 +245,12 @@ namespace Server
             var clientSocket = PacketHandler.clientList.ElementAt(selectedRowIndex).clientSocket;
             clientSocket.Send(shellCommandPackage.ToByteArray());
         }
+
+        private void pretražiDatotekeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FileForm fileForm = new FileForm();
+            fileForm.ShowDialog();
+            fileForm.Focus();
+        }
     }
 }
