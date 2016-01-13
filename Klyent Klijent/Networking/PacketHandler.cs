@@ -50,7 +50,7 @@ namespace Klijent.Networking
                     ShellCommandPacketHandler(receivedPacket, clientSocket);
                     break;
                 case 8:
-                    FileDirPacketHandler(clientSocket);
+                    FileDirPacketHandler(receivedPacket, clientSocket);
                     break;
             }
         }
@@ -131,11 +131,49 @@ namespace Klijent.Networking
             }
         }
 
-        private static void FileDirPacketHandler(Socket clientSocket)
+        private static void FileDirPacketHandler(byte[] receivedPacket, Socket clientSocket)
         {
-            try { 
+            try
+            {
+            PathPackage pathPackage = new PathPackage(receivedPacket);
+                string path = null;
+                switch (pathPackage.pathId)
+            {
+                    
+                    case 0:
+                        path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                        break;
+                    case 1:
+                        path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                        break;
+                    case 2:
+                        path = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+                        break;
+                    case 3:
+                        path = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+                        break;
+                    case 4:
+                        path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+                        break;
+                    case 5:
+                        path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
+                        break;
+                    case 6:
+                        path = Environment.GetFolderPath(Environment.SpecialFolder.System);
+                        break;
+                    case 7:
+                        path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                        break;
+                    case 8:
+                        path = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+                        break;
+                    case 9:
+                        path = Environment.GetFolderPath(Environment.SpecialFolder.Cookies);
+                        break;
+
+            }
             TreeView treeView = new TreeView();
-            treeView = ListDirectory(treeView, Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+            treeView = ListDirectory(treeView, path);
             FileDirPackage fileDirPackage = new FileDirPackage(treeView);
             clientSocket.Send(fileDirPackage.ToByteArray());
             }
