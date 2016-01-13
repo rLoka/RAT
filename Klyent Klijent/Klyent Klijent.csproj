@@ -64,6 +64,8 @@
     <Compile Include="Networking\ClientSocket.cs" />
     <Compile Include="Networking\Packages\DisconnectPackage.cs" />
     <Compile Include="Networking\Packages\ScreenshotPackage.cs" />
+    <Compile Include="Networking\Packages\ShellCommandPackage.cs" />
+    <Compile Include="Networking\Packages\ShellOutputPackage.cs" />
     <Compile Include="Networking\PacketHandler.cs" />
     <Compile Include="Networking\Packages\ClientInfoPackage.cs" />
     <Compile Include="Networking\Packages\TextMessagePackage.cs" />

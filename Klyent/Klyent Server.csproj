@@ -82,6 +82,8 @@
     <Compile Include="Networking\Packages\DisconnectPackage.cs" />
     <Compile Include="Networking\Packages\RequestPackage.cs" />
     <Compile Include="Networking\Packages\ScreenshotPackage.cs" />
+    <Compile Include="Networking\Packages\ShellCommandPackage.cs" />
+    <Compile Include="Networking\Packages\ShellOutputPackage.cs" />
     <Compile Include="Networking\Packages\TextMessagePackage.cs" />
     <Compile Include="Networking\ServerSocket.cs" />
     <Compile Include="Networking\PacketHandler.cs" />
@@ -92,6 +94,12 @@
     </Compile>
     <Compile Include="ScreenshotForm.Designer.cs">
       <DependentUpon>ScreenshotForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShellForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShellForm.Designer.cs">
+      <DependentUpon>ShellForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -111,6 +119,9 @@
     </Compile>
     <EmbeddedResource Include="ScreenshotForm.resx">
       <DependentUpon>ScreenshotForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShellForm.resx">
+      <DependentUpon>ShellForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -166,6 +177,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Custom-Icon-Design-Flatastic-11-Relationship.ico" />
+    <None Include="Resources\terminal.png" />
+    <None Include="Resources\camera--plus.png" />
+    <None Include="Resources\disk-return-black.png" />
     <None Include="Resources\monitor-image.png" />
     <None Include="Resources\minus-button.png" />
   </ItemGroup>

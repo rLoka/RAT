@@ -73,9 +73,29 @@ namespace Server.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap camera__plus {
+            get {
+                object obj = ResourceManager.GetObject("camera--plus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cross_circle {
             get {
                 object obj = ResourceManager.GetObject("cross-circle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap disk_return_black {
+            get {
+                object obj = ResourceManager.GetObject("disk-return-black", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -156,6 +176,16 @@ namespace Server.Properties {
         internal static System.Drawing.Bitmap plug_connect {
             get {
                 object obj = ResourceManager.GetObject("plug-connect", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap terminal {
+            get {
+                object obj = ResourceManager.GetObject("terminal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

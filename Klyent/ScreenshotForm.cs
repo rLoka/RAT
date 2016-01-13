@@ -7,11 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
+using System.IO;
 
 namespace Server
 {
     public partial class ScreenshotForm : Form
     {
+        Image receivedScreenshot;
+
         public ScreenshotForm()
         {
             InitializeComponent();
@@ -24,7 +28,7 @@ namespace Server
 
         public void ReceiveScreenshot(Image screenShot/*, string clientComputerName*/)
         {
-            Image receivedScreenshot = screenShot;
+            receivedScreenshot = screenShot;
             ShowReceivedScreenshot(receivedScreenshot);
         }
 
@@ -46,5 +50,20 @@ namespace Server
             }
         }
 
+        private void spremiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try {
+
+                using (var m = new MemoryStream())
+                {
+                    receivedScreenshot.Save(m, ImageFormat.Png);
+                    var img = Image.FromStream(m);                    
+                    img.Save(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\screenshot.png");
+                }
+            }
+            catch(Exception ex) { }
+
+            MessageBox.Show("Screenshot spremljen kao " + Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\screenshot.png");
+        }
     }
 }

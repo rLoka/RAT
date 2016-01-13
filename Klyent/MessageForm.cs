@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Server.Networking.Packages;
+using Server.Networking;
 
 
 namespace Server
@@ -55,7 +56,8 @@ namespace Server
         {
             try {
             TextMessagePackage textMessagePackage = new TextMessagePackage(rtbMessageText.Text);
-            clientSocket.BeginSend(textMessagePackage.ToByteArray(), 0, textMessagePackage.ToByteArray().Length, SocketFlags.None, new AsyncCallback(SendCallback), null);
+            PacketHandler.clientList.Find(client => client.clientSocket == clientSocket).clientSocket.BeginSend(textMessagePackage.ToByteArray(), 0, textMessagePackage.ToByteArray().Length, SocketFlags.None, new AsyncCallback(SendCallback), null);
+            //clientSocket.BeginSend(textMessagePackage.ToByteArray(), 0, textMessagePackage.ToByteArray().Length, SocketFlags.None, new AsyncCallback(SendCallback), null);
             rtbMessages.AppendText("Ja: " + rtbMessageText.Text + "\r\n");
             rtbMessageText.Clear();
             }

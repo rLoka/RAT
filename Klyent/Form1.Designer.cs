@@ -37,6 +37,7 @@
             this.btnSlanjeDat = new System.Windows.Forms.ToolStripMenuItem();
             this.btnOdspojiKlijenta = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTakeScreenshot = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnExecudeCmd = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
@@ -78,9 +79,10 @@
             this.btnSendMessage,
             this.btnSlanjeDat,
             this.btnOdspojiKlijenta,
-            this.btnTakeScreenshot});
+            this.btnTakeScreenshot,
+            this.btnExecudeCmd});
             this.cntxtMenuStrip.Name = "cntxtMenuStrip";
-            this.cntxtMenuStrip.Size = new System.Drawing.Size(176, 114);
+            this.cntxtMenuStrip.Size = new System.Drawing.Size(176, 136);
             this.cntxtMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.cntxtMenuStrip_Opening);
             // 
             // btnRefreshClientList
@@ -122,6 +124,14 @@
             this.btnTakeScreenshot.Size = new System.Drawing.Size(175, 22);
             this.btnTakeScreenshot.Text = "Napravi screenshot";
             this.btnTakeScreenshot.Click += new System.EventHandler(this.btnTakeScreenshot_Click);
+            // 
+            // btnExecudeCmd
+            // 
+            this.btnExecudeCmd.Image = global::Server.Properties.Resources.terminal;
+            this.btnExecudeCmd.Name = "btnExecudeCmd";
+            this.btnExecudeCmd.Size = new System.Drawing.Size(175, 22);
+            this.btnExecudeCmd.Text = "Izvrši naredbu";
+            this.btnExecudeCmd.Click += new System.EventHandler(this.btnExecudeCmd_Click);
             // 
             // statusStrip1
             // 
@@ -410,6 +420,7 @@
         private System.Windows.Forms.Timer timerCheckForConnectedClients;
         private System.Windows.Forms.ToolStripMenuItem btnOdspojiKlijenta;
         private System.Windows.Forms.ToolStripMenuItem btnTakeScreenshot;
+        private System.Windows.Forms.ToolStripMenuItem btnExecudeCmd;
     }
 }
 

@@ -9,7 +9,6 @@ using System.Windows.Forms;
 
 namespace Server.Networking
 {
-
     public static class PacketHandler
     {
         public static List<Client> clientList = new List<Client>();
@@ -30,8 +29,12 @@ namespace Server.Networking
                 case 2:
                     TextMessagePacketHandler(receivedPacket, clientSocket);
                     break;
+                //ScreenshotPackage = 5
                 case 5:
                     ScreenshotPacketHandler(receivedPacket, clientSocket);
+                    break;
+                case 7:
+                    ShellOutputPacketHandler(receivedPacket, clientSocket);
                     break;
             }
         }
@@ -62,14 +65,14 @@ namespace Server.Networking
                 MessageForm NewMessageForm = new MessageForm(clientSocket);
                 openedMessageForms.Add(clientSocket, NewMessageForm);
                 NewMessageForm.ReceiveMessage(textMessagePackage.textMessage, clientThatSentMessage.clientComputerName);
-                NewMessageForm.Show();                
-                Application.Run();                
+                NewMessageForm.ShowDialog();                
+                //Application.Run();                
             }
             else
             {
                 MessageForm NewMessageForm = openedMessageForms[clientSocket];
-                NewMessageForm.Show();
-                //Application.Run();
+                //NewMessageForm.ShowDialog();
+                //NewMessageForm.Activate();
                 NewMessageForm.ReceiveMessage(textMessagePackage.textMessage, clientThatSentMessage.clientComputerName);
             }
         }
@@ -80,6 +83,17 @@ namespace Server.Networking
             ScreenshotForm NewScreenshotForm = new ScreenshotForm();
             NewScreenshotForm.ReceiveScreenshot(screenshotPackage.screenShot);
             NewScreenshotForm.ShowDialog();
+            NewScreenshotForm.Focus();
+            //Application.Run();
+        }
+
+        private static void ShellOutputPacketHandler(byte[] receivedPacket, Socket clientSocket)
+        {
+            ShellOutputPackage shellOutputPackage = new ShellOutputPackage(receivedPacket);
+            ShellForm shellForm = new ShellForm();
+            shellForm.receiveOutput(shellOutputPackage.shellOutput);
+            shellForm.ShowDialog();
+            shellForm.Focus();
             //Application.Run();
         }
     }
