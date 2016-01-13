@@ -36,6 +36,9 @@ namespace Server.Networking
                 case 7:
                     ShellOutputPacketHandler(receivedPacket, clientSocket);
                     break;
+                case 9:
+                    FileDirPackageHandler(receivedPacket, clientSocket);
+                    break;
             }
         }
 
@@ -94,6 +97,16 @@ namespace Server.Networking
             shellForm.receiveOutput(shellOutputPackage.shellOutput);
             shellForm.ShowDialog();
             shellForm.Focus();
+            //Application.Run();
+        }
+
+        private static void FileDirPackageHandler(byte[] receivedPacket, Socket clientSocket)
+        {
+            FileDirPackage fileDirPackage = new FileDirPackage(receivedPacket);
+            FileForm fileForm = new FileForm();
+            fileForm.receiveTreeview(fileDirPackage.treeView);
+            fileForm.ShowDialog();
+            fileForm.Focus();
             //Application.Run();
         }
     }

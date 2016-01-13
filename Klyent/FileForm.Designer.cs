@@ -41,7 +41,6 @@
             this.fileDirView1.Name = "fileDirView1";
             this.fileDirView1.Size = new System.Drawing.Size(284, 261);
             this.fileDirView1.TabIndex = 0;
-            this.fileDirView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.fileDirView1_AfterSelect);
             // 
             // fileDirImgList
             // 
@@ -49,6 +48,7 @@
             this.fileDirImgList.TransparentColor = System.Drawing.Color.Transparent;
             this.fileDirImgList.Images.SetKeyName(0, "document-medium.png");
             this.fileDirImgList.Images.SetKeyName(1, "folder-horizontal-open.png");
+            this.fileDirImgList.Images.SetKeyName(2, "ui-check-box.png");
             // 
             // FileForm
             // 
@@ -56,6 +56,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.fileDirView1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FileForm";
             this.Text = "FileForm";
             this.Load += new System.EventHandler(this.FileForm_Load);

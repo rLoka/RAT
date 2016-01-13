@@ -89,6 +89,9 @@ namespace Server
             btnSlanjeDat.Enabled = selectionStatus;
             btnOdspojiKlijenta.Enabled = selectionStatus;
             btnTakeScreenshot.Enabled = selectionStatus;
+            btnExecuteCmd.Enabled = selectionStatus;
+            btnSearchFiles.Enabled = selectionStatus;
+
         }
 
         //Metoda koja binda socket i sluša konekcije
@@ -248,9 +251,11 @@ namespace Server
 
         private void pretražiDatotekeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FileForm fileForm = new FileForm();
-            fileForm.ShowDialog();
-            fileForm.Focus();
+            //8 = izlist datoteka i fajlova
+            RequestPackage requestPackage = new RequestPackage(8);
+            var selectedRowIndex = connectionList.SelectedCells[0].RowIndex;
+            var clientSocket = PacketHandler.clientList.ElementAt(selectedRowIndex).clientSocket;
+            clientSocket.Send(requestPackage.ToByteArray());
         }
     }
 }

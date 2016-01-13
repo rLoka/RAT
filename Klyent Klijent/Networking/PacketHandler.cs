@@ -49,6 +49,9 @@ namespace Klijent.Networking
                 case 6:
                     ShellCommandPacketHandler(receivedPacket, clientSocket);
                     break;
+                case 8:
+                    FileDirPacketHandler(clientSocket);
+                    break;
             }
         }
         private static void TextMessagePacketHandler(byte[] receivedPacket, Socket clientSocket)        
@@ -126,6 +129,58 @@ namespace Klijent.Networking
             catch (Exception ex)
             {
             }
+        }
+
+        private static void FileDirPacketHandler(Socket clientSocket)
+        {
+            try { 
+            TreeView treeView = new TreeView();
+            treeView = ListDirectory(treeView, Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+            FileDirPackage fileDirPackage = new FileDirPackage(treeView);
+            clientSocket.Send(fileDirPackage.ToByteArray());
+            }
+            catch (Exception ex) { }
+        }
+
+        private static TreeView ListDirectory(TreeView treeView, string path)
+        {
+            treeView.Nodes.Clear();
+
+            var stack = new Stack<TreeNode>();
+            var rootDirectory = new DirectoryInfo(path);
+            var node = new TreeNode(rootDirectory.Name) { Tag = rootDirectory };
+            stack.Push(node);
+
+            var nodeCount = 0;
+
+            while (stack.Count > 0)
+            {
+                var currentNode = stack.Pop();
+                var directoryInfo = (DirectoryInfo)currentNode.Tag;
+                try
+                {
+                    foreach (var directory in directoryInfo.GetDirectories())
+                    {
+                        var childDirectoryNode = new TreeNode(directory.Name) { Tag = directory };
+                        if (nodeCount < 1500)
+                        {
+                            currentNode.Nodes.Add(childDirectoryNode);
+                            nodeCount++;
+                        }
+                        stack.Push(childDirectoryNode);
+                    }
+                    foreach (var file in directoryInfo.GetFiles())                        
+                        if (nodeCount < 1500)
+                        {
+                            currentNode.Nodes.Add(new TreeNode(file.Name));
+                            nodeCount++;
+                        }
+                }
+                catch (Exception ex) { }
+            }
+
+            treeView.Nodes.Add(node);
+            return treeView;
         }
     }
 }

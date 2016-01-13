@@ -63,6 +63,7 @@
     </Compile>
     <Compile Include="Networking\ClientSocket.cs" />
     <Compile Include="Networking\Packages\DisconnectPackage.cs" />
+    <Compile Include="Networking\Packages\FileDirPackage.cs" />
     <Compile Include="Networking\Packages\ScreenshotPackage.cs" />
     <Compile Include="Networking\Packages\ShellCommandPackage.cs" />
     <Compile Include="Networking\Packages\ShellOutputPackage.cs" />
@@ -88,7 +89,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

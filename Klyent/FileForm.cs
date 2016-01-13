@@ -13,51 +13,64 @@ namespace Server
 {
     public partial class FileForm : Form
     {
+
+        TreeView newTreeView = new TreeView();
+
         public FileForm()
         {
             InitializeComponent();
         }
 
+        public void receiveTreeview(TreeView treeView)
+        {
+            newTreeView = treeView;
+            newTreeView.ImageList = fileDirImgList;
+            //newTreeView.ImageIndex = 1;
+        }
+
         private void FileForm_Load(object sender, EventArgs e)
         {
-            ListDirectory(fileDirView1, Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileDirImgList);
-            
+            CopyTreeNodes(newTreeView, fileDirView1);
         }
 
-        private static void ListDirectory(TreeView treeView, string path, ImageList fileDirImgList)
+        public void CopyTreeNodes(TreeView treeview1, TreeView treeview2)
         {
-            treeView.Nodes.Clear();
-            treeView.ImageList = fileDirImgList;
-
-            var stack = new Stack<TreeNode>();
-            var rootDirectory = new DirectoryInfo(path);
-            var node = new TreeNode(rootDirectory.Name) { Tag = rootDirectory };
-            stack.Push(node);
-
-            while (stack.Count > 0)
+            treeview2.ImageList = fileDirImgList;
+            treeview2.SelectedImageIndex = 2;
+            TreeNode newTn;
+            foreach (TreeNode tn in treeview1.Nodes)
             {
-                var currentNode = stack.Pop();
-                var directoryInfo = (DirectoryInfo)currentNode.Tag;
-                try { 
-                foreach (var directory in directoryInfo.GetDirectories())
+                newTn = new TreeNode(tn.Text);                
+                CopyChildren(newTn, tn);
+                if (newTn.ToString().Contains("."))
                 {
-                    var childDirectoryNode = new TreeNode(directory.Name) { Tag = directory };
-                    childDirectoryNode.ImageIndex = 1;
-                    currentNode.Nodes.Add(childDirectoryNode);
-                    stack.Push(childDirectoryNode);
+                    newTn.ImageIndex = 0;
                 }
-                foreach (var file in directoryInfo.GetFiles())
-                    currentNode.Nodes.Add(new TreeNode(file.Name));
+                else
+                {
+                    newTn.ImageIndex = 1;
                 }
-                catch (Exception ex) { }
+                treeview2.Nodes.Add(newTn);
             }
-
-            treeView.Nodes.Add(node);
         }
 
-        private void fileDirView1_AfterSelect(object sender, TreeViewEventArgs e)
+        public void CopyChildren(TreeNode parent, TreeNode original)
         {
-
+            TreeNode newTn;
+            foreach (TreeNode tn in original.Nodes)
+            {
+                newTn = new TreeNode(tn.Text);
+                parent.Nodes.Add(newTn);
+                CopyChildren(newTn, tn);
+                if (newTn.ToString().Contains("."))
+                {
+                    newTn.ImageIndex = 0;
+                }
+                else
+                {
+                    newTn.ImageIndex = 1;
+                }
+            }
         }
     }
 }

@@ -86,6 +86,7 @@
     </Compile>
     <Compile Include="Networking\Packages\ClientInfoPackage.cs" />
     <Compile Include="Networking\Packages\DisconnectPackage.cs" />
+    <Compile Include="Networking\Packages\FileDirPackage.cs" />
     <Compile Include="Networking\Packages\RequestPackage.cs" />
     <Compile Include="Networking\Packages\ScreenshotPackage.cs" />
     <Compile Include="Networking\Packages\ShellCommandPackage.cs" />
@@ -186,6 +187,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Custom-Icon-Design-Flatastic-11-Relationship.ico" />
+    <None Include="Resources\magnifier-zoom.png" />
     <None Include="Resources\drive-globe.png" />
     <None Include="Resources\terminal.png" />
     <None Include="Resources\camera--plus.png" />

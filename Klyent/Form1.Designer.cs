@@ -32,24 +32,26 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.connectionList = new System.Windows.Forms.DataGridView();
             this.cntxtMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.imageList = new System.Windows.Forms.ImageList(this.components);
-            this.timerCheckForConnectedClients = new System.Windows.Forms.Timer(this.components);
             this.btnRefreshClientList = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSendMessage = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSlanjeDat = new System.Windows.Forms.ToolStripMenuItem();
-            this.pretražiDatotekeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSearchFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.btnOdspojiKlijenta = new System.Windows.Forms.ToolStripMenuItem();
             this.btnTakeScreenshot = new System.Windows.Forms.ToolStripMenuItem();
             this.btnExecuteCmd = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.opcijeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.postaviPortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbPort = new System.Windows.Forms.ToolStripTextBox();
             this.btnPostaviPort = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSlusajKonekcije = new System.Windows.Forms.ToolStripMenuItem();
             this.btnZatvori = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageList = new System.Windows.Forms.ImageList(this.components);
+            this.timerCheckForConnectedClients = new System.Windows.Forms.Timer(this.components);
+            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.pretražiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.connectionList)).BeginInit();
             this.cntxtMenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -79,13 +81,72 @@
             this.btnRefreshClientList,
             this.btnSendMessage,
             this.btnSlanjeDat,
-            this.pretražiDatotekeToolStripMenuItem,
+            this.btnSearchFiles,
             this.btnOdspojiKlijenta,
             this.btnTakeScreenshot,
             this.btnExecuteCmd});
             this.cntxtMenuStrip.Name = "cntxtMenuStrip";
-            this.cntxtMenuStrip.Size = new System.Drawing.Size(176, 158);
+            this.cntxtMenuStrip.Size = new System.Drawing.Size(176, 180);
             this.cntxtMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.cntxtMenuStrip_Opening);
+            // 
+            // btnRefreshClientList
+            // 
+            this.btnRefreshClientList.Image = global::Server.Properties.Resources.arrow_circle_double_135;
+            this.btnRefreshClientList.Name = "btnRefreshClientList";
+            this.btnRefreshClientList.Size = new System.Drawing.Size(175, 22);
+            this.btnRefreshClientList.Text = "Osvježi";
+            this.btnRefreshClientList.Click += new System.EventHandler(this.btnRefreshClientList_Click);
+            // 
+            // btnSendMessage
+            // 
+            this.btnSendMessage.Image = global::Server.Properties.Resources.mail;
+            this.btnSendMessage.Name = "btnSendMessage";
+            this.btnSendMessage.Size = new System.Drawing.Size(175, 22);
+            this.btnSendMessage.Text = "Pošalji poruku";
+            this.btnSendMessage.Click += new System.EventHandler(this.btnSendMessage_Click);
+            // 
+            // btnSlanjeDat
+            // 
+            this.btnSlanjeDat.Image = global::Server.Properties.Resources.inbox_upload;
+            this.btnSlanjeDat.Name = "btnSlanjeDat";
+            this.btnSlanjeDat.Size = new System.Drawing.Size(175, 22);
+            this.btnSlanjeDat.Text = "Slanje datoteke";
+            this.btnSlanjeDat.Click += new System.EventHandler(this.btnSlanjeDat_Click);
+            // 
+            // btnSearchFiles
+            // 
+            this.btnSearchFiles.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripComboBox1,
+            this.pretražiToolStripMenuItem});
+            this.btnSearchFiles.Image = global::Server.Properties.Resources.drive_globe;
+            this.btnSearchFiles.Name = "btnSearchFiles";
+            this.btnSearchFiles.Size = new System.Drawing.Size(175, 22);
+            this.btnSearchFiles.Text = "Pretraži datoteke";
+            this.btnSearchFiles.Click += new System.EventHandler(this.pretražiDatotekeToolStripMenuItem_Click);
+            // 
+            // btnOdspojiKlijenta
+            // 
+            this.btnOdspojiKlijenta.Image = global::Server.Properties.Resources.minus_button;
+            this.btnOdspojiKlijenta.Name = "btnOdspojiKlijenta";
+            this.btnOdspojiKlijenta.Size = new System.Drawing.Size(175, 22);
+            this.btnOdspojiKlijenta.Text = "Odspoji klijenta";
+            this.btnOdspojiKlijenta.Click += new System.EventHandler(this.btnOdspojiKlijenta_Click);
+            // 
+            // btnTakeScreenshot
+            // 
+            this.btnTakeScreenshot.Image = global::Server.Properties.Resources.monitor_image;
+            this.btnTakeScreenshot.Name = "btnTakeScreenshot";
+            this.btnTakeScreenshot.Size = new System.Drawing.Size(175, 22);
+            this.btnTakeScreenshot.Text = "Napravi screenshot";
+            this.btnTakeScreenshot.Click += new System.EventHandler(this.btnTakeScreenshot_Click);
+            // 
+            // btnExecuteCmd
+            // 
+            this.btnExecuteCmd.Image = global::Server.Properties.Resources.terminal;
+            this.btnExecuteCmd.Name = "btnExecuteCmd";
+            this.btnExecuteCmd.Size = new System.Drawing.Size(175, 22);
+            this.btnExecuteCmd.Text = "Izvrši naredbu";
+            this.btnExecuteCmd.Click += new System.EventHandler(this.btnExecudeCmd_Click);
             // 
             // statusStrip1
             // 
@@ -97,6 +158,13 @@
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // lblStatusLabel
+            // 
+            this.lblStatusLabel.Image = global::Server.Properties.Resources.globe_network_ethernet;
+            this.lblStatusLabel.Name = "lblStatusLabel";
+            this.lblStatusLabel.Size = new System.Drawing.Size(74, 17);
+            this.lblStatusLabel.Text = "Neaktvno";
+            // 
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -106,6 +174,60 @@
             this.menuStrip.Size = new System.Drawing.Size(633, 24);
             this.menuStrip.TabIndex = 5;
             this.menuStrip.Text = "menuStrip1";
+            // 
+            // opcijeToolStripMenuItem
+            // 
+            this.opcijeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.postaviPortToolStripMenuItem,
+            this.btnSlusajKonekcije,
+            this.btnZatvori});
+            this.opcijeToolStripMenuItem.Image = global::Server.Properties.Resources.gear;
+            this.opcijeToolStripMenuItem.Name = "opcijeToolStripMenuItem";
+            this.opcijeToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
+            this.opcijeToolStripMenuItem.Text = "Opcije";
+            // 
+            // postaviPortToolStripMenuItem
+            // 
+            this.postaviPortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tbPort,
+            this.btnPostaviPort});
+            this.postaviPortToolStripMenuItem.Image = global::Server.Properties.Resources.network_ip_local;
+            this.postaviPortToolStripMenuItem.Name = "postaviPortToolStripMenuItem";
+            this.postaviPortToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.postaviPortToolStripMenuItem.Text = "Postavi port";
+            // 
+            // tbPort
+            // 
+            this.tbPort.Name = "tbPort";
+            this.tbPort.Size = new System.Drawing.Size(100, 23);
+            this.tbPort.Text = "6556";
+            this.tbPort.TextChanged += new System.EventHandler(this.tbPort_TextChanged);
+            // 
+            // btnPostaviPort
+            // 
+            this.btnPostaviPort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnPostaviPort.Image = global::Server.Properties.Resources.tick_button;
+            this.btnPostaviPort.Name = "btnPostaviPort";
+            this.btnPostaviPort.Size = new System.Drawing.Size(160, 22);
+            this.btnPostaviPort.Text = "Postavi";
+            this.btnPostaviPort.Click += new System.EventHandler(this.btnPostaviPort_Click);
+            // 
+            // btnSlusajKonekcije
+            // 
+            this.btnSlusajKonekcije.Enabled = false;
+            this.btnSlusajKonekcije.Image = global::Server.Properties.Resources.plug_connect;
+            this.btnSlusajKonekcije.Name = "btnSlusajKonekcije";
+            this.btnSlusajKonekcije.Size = new System.Drawing.Size(157, 22);
+            this.btnSlusajKonekcije.Text = "Slušaj konekcije";
+            this.btnSlusajKonekcije.Click += new System.EventHandler(this.btnSlusajKonekcije_Click);
+            // 
+            // btnZatvori
+            // 
+            this.btnZatvori.Image = global::Server.Properties.Resources.cross_circle;
+            this.btnZatvori.Name = "btnZatvori";
+            this.btnZatvori.Size = new System.Drawing.Size(157, 22);
+            this.btnZatvori.Text = "Zatvori";
+            this.btnZatvori.Click += new System.EventHandler(this.btnZatvori_Click);
             // 
             // imageList
             // 
@@ -269,122 +391,28 @@
             this.timerCheckForConnectedClients.Interval = 1000;
             this.timerCheckForConnectedClients.Tick += new System.EventHandler(this.timerCheckForConnectedClients_Tick);
             // 
-            // btnRefreshClientList
+            // toolStripComboBox1
             // 
-            this.btnRefreshClientList.Image = global::Server.Properties.Resources.arrow_circle_double_135;
-            this.btnRefreshClientList.Name = "btnRefreshClientList";
-            this.btnRefreshClientList.Size = new System.Drawing.Size(175, 22);
-            this.btnRefreshClientList.Text = "Osvježi";
-            this.btnRefreshClientList.Click += new System.EventHandler(this.btnRefreshClientList_Click);
+            this.toolStripComboBox1.Items.AddRange(new object[] {
+            "Desktop",
+            "MyDocuments",
+            "MyPictures",
+            "MyVideos",
+            "ProgramFiles",
+            "ProgramFilesX86",
+            "System",
+            "UserProfile",
+            "Windows",
+            "Cookies"});
+            this.toolStripComboBox1.Name = "toolStripComboBox1";
+            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 23);
             // 
-            // btnSendMessage
+            // pretražiToolStripMenuItem
             // 
-            this.btnSendMessage.Image = global::Server.Properties.Resources.mail;
-            this.btnSendMessage.Name = "btnSendMessage";
-            this.btnSendMessage.Size = new System.Drawing.Size(175, 22);
-            this.btnSendMessage.Text = "Pošalji poruku";
-            this.btnSendMessage.Click += new System.EventHandler(this.btnSendMessage_Click);
-            // 
-            // btnSlanjeDat
-            // 
-            this.btnSlanjeDat.Image = global::Server.Properties.Resources.inbox_upload;
-            this.btnSlanjeDat.Name = "btnSlanjeDat";
-            this.btnSlanjeDat.Size = new System.Drawing.Size(175, 22);
-            this.btnSlanjeDat.Text = "Slanje datoteke";
-            this.btnSlanjeDat.Click += new System.EventHandler(this.btnSlanjeDat_Click);
-            // 
-            // pretražiDatotekeToolStripMenuItem
-            // 
-            this.pretražiDatotekeToolStripMenuItem.Image = global::Server.Properties.Resources.drive_globe;
-            this.pretražiDatotekeToolStripMenuItem.Name = "pretražiDatotekeToolStripMenuItem";
-            this.pretražiDatotekeToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.pretražiDatotekeToolStripMenuItem.Text = "Pretraži datoteke";
-            this.pretražiDatotekeToolStripMenuItem.Click += new System.EventHandler(this.pretražiDatotekeToolStripMenuItem_Click);
-            // 
-            // btnOdspojiKlijenta
-            // 
-            this.btnOdspojiKlijenta.Image = global::Server.Properties.Resources.minus_button;
-            this.btnOdspojiKlijenta.Name = "btnOdspojiKlijenta";
-            this.btnOdspojiKlijenta.Size = new System.Drawing.Size(175, 22);
-            this.btnOdspojiKlijenta.Text = "Odspoji klijenta";
-            this.btnOdspojiKlijenta.Click += new System.EventHandler(this.btnOdspojiKlijenta_Click);
-            // 
-            // btnTakeScreenshot
-            // 
-            this.btnTakeScreenshot.Image = global::Server.Properties.Resources.monitor_image;
-            this.btnTakeScreenshot.Name = "btnTakeScreenshot";
-            this.btnTakeScreenshot.Size = new System.Drawing.Size(175, 22);
-            this.btnTakeScreenshot.Text = "Napravi screenshot";
-            this.btnTakeScreenshot.Click += new System.EventHandler(this.btnTakeScreenshot_Click);
-            // 
-            // btnExecuteCmd
-            // 
-            this.btnExecuteCmd.Image = global::Server.Properties.Resources.terminal;
-            this.btnExecuteCmd.Name = "btnExecuteCmd";
-            this.btnExecuteCmd.Size = new System.Drawing.Size(175, 22);
-            this.btnExecuteCmd.Text = "Izvrši naredbu";
-            this.btnExecuteCmd.Click += new System.EventHandler(this.btnExecudeCmd_Click);
-            // 
-            // lblStatusLabel
-            // 
-            this.lblStatusLabel.Image = global::Server.Properties.Resources.globe_network_ethernet;
-            this.lblStatusLabel.Name = "lblStatusLabel";
-            this.lblStatusLabel.Size = new System.Drawing.Size(74, 16);
-            this.lblStatusLabel.Text = "Neaktvno";
-            // 
-            // opcijeToolStripMenuItem
-            // 
-            this.opcijeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.postaviPortToolStripMenuItem,
-            this.btnSlusajKonekcije,
-            this.btnZatvori});
-            this.opcijeToolStripMenuItem.Image = global::Server.Properties.Resources.gear;
-            this.opcijeToolStripMenuItem.Name = "opcijeToolStripMenuItem";
-            this.opcijeToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
-            this.opcijeToolStripMenuItem.Text = "Opcije";
-            // 
-            // postaviPortToolStripMenuItem
-            // 
-            this.postaviPortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tbPort,
-            this.btnPostaviPort});
-            this.postaviPortToolStripMenuItem.Image = global::Server.Properties.Resources.network_ip_local;
-            this.postaviPortToolStripMenuItem.Name = "postaviPortToolStripMenuItem";
-            this.postaviPortToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
-            this.postaviPortToolStripMenuItem.Text = "Postavi port";
-            // 
-            // tbPort
-            // 
-            this.tbPort.Name = "tbPort";
-            this.tbPort.Size = new System.Drawing.Size(100, 23);
-            this.tbPort.Text = "6556";
-            this.tbPort.TextChanged += new System.EventHandler(this.tbPort_TextChanged);
-            // 
-            // btnPostaviPort
-            // 
-            this.btnPostaviPort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnPostaviPort.Image = global::Server.Properties.Resources.tick_button;
-            this.btnPostaviPort.Name = "btnPostaviPort";
-            this.btnPostaviPort.Size = new System.Drawing.Size(160, 22);
-            this.btnPostaviPort.Text = "Postavi";
-            this.btnPostaviPort.Click += new System.EventHandler(this.btnPostaviPort_Click);
-            // 
-            // btnSlusajKonekcije
-            // 
-            this.btnSlusajKonekcije.Enabled = false;
-            this.btnSlusajKonekcije.Image = global::Server.Properties.Resources.plug_connect;
-            this.btnSlusajKonekcije.Name = "btnSlusajKonekcije";
-            this.btnSlusajKonekcije.Size = new System.Drawing.Size(157, 22);
-            this.btnSlusajKonekcije.Text = "Slušaj konekcije";
-            this.btnSlusajKonekcije.Click += new System.EventHandler(this.btnSlusajKonekcije_Click);
-            // 
-            // btnZatvori
-            // 
-            this.btnZatvori.Image = global::Server.Properties.Resources.cross_circle;
-            this.btnZatvori.Name = "btnZatvori";
-            this.btnZatvori.Size = new System.Drawing.Size(157, 22);
-            this.btnZatvori.Text = "Zatvori";
-            this.btnZatvori.Click += new System.EventHandler(this.btnZatvori_Click);
+            this.pretražiToolStripMenuItem.Image = global::Server.Properties.Resources.magnifier_zoom;
+            this.pretražiToolStripMenuItem.Name = "pretražiToolStripMenuItem";
+            this.pretražiToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.pretražiToolStripMenuItem.Text = "Pretraži";
             // 
             // Form1
             // 
@@ -431,7 +459,9 @@
         private System.Windows.Forms.ToolStripMenuItem btnOdspojiKlijenta;
         private System.Windows.Forms.ToolStripMenuItem btnTakeScreenshot;
         private System.Windows.Forms.ToolStripMenuItem btnExecuteCmd;
-        private System.Windows.Forms.ToolStripMenuItem pretražiDatotekeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem btnSearchFiles;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
+        private System.Windows.Forms.ToolStripMenuItem pretražiToolStripMenuItem;
     }
 }
 
