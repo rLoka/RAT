@@ -113,6 +113,7 @@ namespace Server.Networking
             {
                 PacketHandler.clientList.Remove(PacketHandler.clientList.Find(client => client.clientSocket == clientSocket));
                 clientSocket.Close();
+                MessageBox.Show("Krepalo je!", "Bla", MessageBoxButtons.OK);
                 //ShowServerSocketError("Nije moguće prihvatiti podatke klijenta!");
             }
         }
