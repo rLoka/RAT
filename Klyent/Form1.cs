@@ -249,13 +249,5 @@ namespace Server
             clientSocket.Send(shellCommandPackage.ToByteArray());
         }
 
-        private void pretražiDatotekeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //8 = izlist datoteka i fajlova
-            RequestPackage requestPackage = new RequestPackage(8);
-            var selectedRowIndex = connectionList.SelectedCells[0].RowIndex;
-            var clientSocket = PacketHandler.clientList.ElementAt(selectedRowIndex).clientSocket;
-            clientSocket.Send(requestPackage.ToByteArray());
-        }
     }
 }
