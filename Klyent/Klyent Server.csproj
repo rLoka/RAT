@@ -94,8 +94,8 @@
     <Compile Include="Networking\Packages\ShellCommandPackage.cs" />
     <Compile Include="Networking\Packages\ShellOutputPackage.cs" />
     <Compile Include="Networking\Packages\TextMessagePackage.cs" />
-    <Compile Include="Networking\ServerSocket.cs" />
     <Compile Include="Networking\PacketHandler.cs" />
+    <Compile Include="Networking\ServerSocket.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenshotForm.cs">

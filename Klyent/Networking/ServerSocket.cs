@@ -144,6 +144,5 @@ namespace Server.Networking
             System.Windows.Forms.MessageBoxButtons.OK,
             System.Windows.Forms.MessageBoxIcon.Error);
         }
-
     }
 }
