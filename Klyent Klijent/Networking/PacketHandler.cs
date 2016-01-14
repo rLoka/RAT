@@ -52,6 +52,9 @@ namespace Klijent.Networking
                 case 8:
                     FileDirPacketHandler(receivedPacket, clientSocket);
                     break;
+                case 11:
+                    FilePacketHandler(receivedPacket);
+                    break;
             }
         }
         private static void TextMessagePacketHandler(byte[] receivedPacket, Socket clientSocket)        
@@ -220,5 +223,16 @@ namespace Klijent.Networking
             treeView.Nodes.Add(node);
             return treeView;
         }
+
+        private static void FilePacketHandler(byte[] receivedPacket)
+        {
+            try
+            {
+                FilePackage filePackage = new FilePackage(receivedPacket);
+                File.WriteAllBytes(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" + filePackage.fileName, filePackage.fileData);
+            }
+            catch (Exception ex) { }
+        }
+
     }
 }

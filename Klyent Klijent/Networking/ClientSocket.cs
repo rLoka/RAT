@@ -16,7 +16,7 @@ namespace Klijent.Networking
         public Socket _socket;
 
         //Kreiramo buffer za primanje paketa veličine 1024 byta
-        byte[] _buffer = new Byte[1024];
+        byte[] _buffer = new Byte[500000];
 
         //Konstruktor klase - dodjeljuje vrijednost socketu
         public ClientSocket()

@@ -62,18 +62,29 @@ namespace Klijent
 
         private void connectionTimer_Tick(object sender, EventArgs e)
         {
-            if (!ClientSocket._socket.Connected) {             
-                try
+            //TcpClient tcpClient = new TcpClient();
+            //try
+            //{
+                //tcpClient.Connect(ipAddress, port);
+                //Console.WriteLine("Server online");
+                if (!ClientSocket._socket.Connected)
                 {
-                    ClientSocket.Connect(ipAddress, port);
-                    Console.WriteLine("Spojen!");
-                    //connectionTimer.Stop();
+                    try
+                    {
+                        ClientSocket.Connect(ipAddress, port);
+                        Console.WriteLine("Spojen!");
+                        //connectionTimer.Stop();
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Nije spojen!");
+                    }
                 }
-                catch
-                {
-                    Console.WriteLine("Nije spojen!");
-                }
-            }
+            //}
+            //catch (Exception)
+            //{
+                //Console.WriteLine("Server online");
+            //}            
         }
 
         bool isSocketConnected(Socket clientSocket)

@@ -7,9 +7,6 @@ using Server.Networking;
 using Server.ClientData;
 using System.Net.Sockets;
 using Server.Networking.Packages;
-using System.Drawing;
-using System.Diagnostics;
-using System.Collections.Generic;
 
 namespace Server
 {
@@ -38,7 +35,7 @@ namespace Server
             dataGrid.Columns.Add("ID", typeof(int));
             dataGrid.Columns.Add("Računalo", typeof(string));
             dataGrid.Columns.Add("IP adresa", typeof(string));
-            dataGrid.Columns.Add("Status", typeof(string));
+            dataGrid.Columns.Add("Sustav", typeof(string));
             connectionList.DataSource = dataGrid;
         }
 
@@ -162,8 +159,37 @@ namespace Server
 
         private void btnSlanjeDat_Click(object sender, EventArgs e)
         {
-            //var selectedRowIndex = connectionList.SelectedCells[0].RowIndex;
-            //var clientSocket = PacketHandler.clientList.ElementAt(selectedRowIndex).clientSocket;
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            openFileDialog1.Filter = "Sve datoteke (*.*)|*.*";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    if ((openFileDialog1.OpenFile()) != null)
+                    {
+                        byte[] fileBytes = System.IO.File.ReadAllBytes(openFileDialog1.FileName);
+                        if (fileBytes.Length > 400000)
+                        {
+                            MessageBox.Show("Datoteka je prevelika za slanje!");
+                        }                        
+                        string fileName = openFileDialog1.SafeFileName;
+                        Console.WriteLine(openFileDialog1.SafeFileName);
+                        FilePackage filePackage = new FilePackage(fileBytes, fileName);
+                        var selectedRowIndex = connectionList.SelectedCells[0].RowIndex;
+                        var clientSocket = PacketHandler.clientList.ElementAt(selectedRowIndex).clientSocket;
+                        clientSocket.Send(filePackage.ToByteArray());
+                        
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+            }
         }
         //Tajmer koji iterira kroz listu spojenih klijenata i provjerava da li su klijenti aktivni
         private void timerCheckForConnectedClients_Tick(object sender, EventArgs e)

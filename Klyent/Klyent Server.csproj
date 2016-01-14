@@ -87,6 +87,7 @@
     <Compile Include="Networking\Packages\ClientInfoPackage.cs" />
     <Compile Include="Networking\Packages\DisconnectPackage.cs" />
     <Compile Include="Networking\Packages\FileDirPackage.cs" />
+    <Compile Include="Networking\Packages\FilePackage.cs" />
     <Compile Include="Networking\Packages\PathPackage.cs" />
     <Compile Include="Networking\Packages\RequestPackage.cs" />
     <Compile Include="Networking\Packages\ScreenshotPackage.cs" />
